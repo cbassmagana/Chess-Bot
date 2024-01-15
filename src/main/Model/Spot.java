@@ -1,5 +1,6 @@
 package Model;
 
+// represents a spot on the chess board
 public class Spot {
     private int x;
     private int y;
@@ -11,22 +12,6 @@ public class Spot {
         this.y = y;
         this.white = white;
         this.piece = piece;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public boolean isWhite() {
-        return white;
-    }
-
-    public Piece getPiece() {
-        return piece;
     }
 
     public void setPiece(Piece piece) {
@@ -45,11 +30,19 @@ public class Spot {
         }
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public int getX() {
+        return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public int getY() {
+        return y;
+    }
+
+    public boolean isWhite() {
+        return white;
+    }
+
+    public Piece getPiece() {
+        return piece;
     }
 }

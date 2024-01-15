@@ -1,11 +1,13 @@
 package Model;
 
+// Represents a specific piece, a king, that extends the abstract Piece class
 public class King extends Piece {
 
-    public King(boolean white, Spot spot) {
-        super(white, spot, 100);
+    public King(boolean white, Spot spot, Board board) {
+        super(white, spot, 100, board);
     }
 
+    // EFFECTS: returns that a move is valid if the king moves only 1 square
     @Override
     public boolean isValidMove(Spot startSpot, Spot endSpot) {
         int deltaX = endSpot.getX() - startSpot.getX();
@@ -16,5 +18,10 @@ public class King extends Piece {
         }
 
         return false;
+    }
+
+    @Override
+    public Piece copyPiece() {
+        return new King(white, null, null);
     }
 }

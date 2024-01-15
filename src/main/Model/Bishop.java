@@ -1,11 +1,13 @@
 package Model;
 
+// Represents a specific piece, a bishop, that extends the abstract Piece class
 public class Bishop extends Piece {
 
-    public Bishop(boolean white, Spot spot) {
-        super(white, spot, 3);
+    public Bishop(boolean white, Spot spot, Board board) {
+        super(white, spot, 3, board);
     }
 
+    // EFFECTS: returns that a move is valid if the bishop moves diagonally
     @Override
     public boolean isValidMove(Spot startSpot, Spot endSpot) {
         int startY = startSpot.getY();
@@ -15,7 +17,7 @@ public class Bishop extends Piece {
         int deltaX = endX - startX;
         int deltaY = endY - startY;
 
-        if (Math.abs(deltaX) != Math.abs(deltaY)) {
+        if (Math.abs(deltaX) != Math.abs(deltaY) || deltaX == 0) {
             return false;
         }
 
@@ -23,12 +25,17 @@ public class Bishop extends Piece {
         int dirX = Math.round(deltaX / Math.abs(deltaX));
 
         for (int i = 1; i < Math.abs(deltaY); i++) {
-            if (Board.getInstance().getSquare(startY + (i * dirY), startX + (i * dirX)).getPiece() != null) {
+            if (board.getSquare(startY + (i * dirY), startX + (i * dirX)).getPiece() != null) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    @Override
+    public Piece copyPiece() {
+        return new Bishop(white, null, null);
     }
 
 }

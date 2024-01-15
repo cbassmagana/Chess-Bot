@@ -1,11 +1,13 @@
 package Model;
 
+// Represents a move in the game, where a player moves a piece from a start spot to an end spot on the board
 public class Move {
     private Piece pieceMoved;
     private Piece pieceKilled;
     private boolean whitesTurn;
     private Spot startSpot;
     private Spot endSpot;
+    private boolean pawnPromotion;
 
     public Move (Piece pieceMoved, Spot endSpot, boolean whitesTurn) {
         this.pieceMoved = pieceMoved;
@@ -13,8 +15,10 @@ public class Move {
         this.endSpot = endSpot;
         this.whitesTurn = whitesTurn;
         this.pieceKilled = endSpot.getPiece();
+        this.pawnPromotion = isPawnPromotion();
     }
 
+    // Returns that a move is valid if it is that player's turn and the move is legal for the piece of interest
     public boolean isValid() {
         Spot startSpot = pieceMoved.getSpot();
         Piece endPiece = endSpot.getPiece();
@@ -24,22 +28,29 @@ public class Move {
         }
 
         if (whitesTurn == pieceMoved.isWhite() && startSpot != endSpot) {
-
-            if (pieceMoved.isValidMove(startSpot, endSpot)) {
-                return true;
-            }
-
+            return pieceMoved.isValidMove(startSpot, endSpot);
         }
 
         return false;
     }
 
+    // Returns true if the move involves a pawn being promoted by reaching the back rank
+    public boolean isPawnPromotion() {
+        if (pieceMoved instanceof Pawn) {
+            if (pieceMoved.isWhite() && endSpot.getY() == 7) {
+                return true;
+            }
+            if (!pieceMoved.isWhite() && endSpot.getY() == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int getKillValue() {
         if (this.pieceKilled == null) {
-            System.out.println(0);
             return 0;
         } else {
-            System.out.println(this.pieceKilled.getValue());
             return this.pieceKilled.getValue();
         }
     }
@@ -60,7 +71,7 @@ public class Move {
         return startSpot;
     }
 
-    public boolean isWhitesTurn() {
-        return whitesTurn;
+    public Move copyMove(Piece copyPieceMoved, Spot copyEndSpot) {
+        return new Move(copyPieceMoved, copyEndSpot, whitesTurn);
     }
 }

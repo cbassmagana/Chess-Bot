@@ -1,11 +1,13 @@
 package Model;
 
+// Represents a specific piece, a rook, that extends the abstract Piece class
 public class Rook extends Piece {
 
-    public Rook(boolean white, Spot spot) {
-        super(white, spot, 5);
+    public Rook(boolean white, Spot spot, Board board) {
+        super(white, spot, 5, board);
     }
 
+    // EFFECTS: returns that a move is valid if the rook moves in a straight line horizontally or vertically
     @Override
     public boolean isValidMove(Spot startSpot, Spot endSpot) {
         int startY = startSpot.getY();
@@ -29,7 +31,7 @@ public class Rook extends Piece {
 
         if (startX == endX) {
             for (int i = startY + dirY; startY < endY ? i < endY : i > endY;) {
-                if (Board.getInstance().getSquare(i, startX).getPiece() != null) {
+                if (board.getSquare(i, startX).getPiece() != null) {
                     return false;
                 }
                 i = i + dirY;
@@ -39,7 +41,7 @@ public class Rook extends Piece {
 
         if (startY == endY) {
             for (int i = startX + dirX; startX < endX ? i < endX : i > endX;) {
-                if (Board.getInstance().getSquare(startY, i).getPiece() != null) {
+                if (board.getSquare(startY, i).getPiece() != null) {
                     return false;
                 }
                 i = i + dirX;
@@ -48,6 +50,11 @@ public class Rook extends Piece {
         }
 
         return false;
+    }
+
+    @Override
+    public Piece copyPiece() {
+        return new Rook(white, null, null);
     }
 
 }

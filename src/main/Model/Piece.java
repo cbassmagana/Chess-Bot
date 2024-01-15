@@ -1,28 +1,17 @@
 package Model;
 
+// Represents an abstract piece in the game that is on a spot and belongs to a player's side
 public abstract class Piece {
-    protected boolean killed;
     protected boolean white;
     protected Spot spot;
     protected int value;
+    protected Board board;
 
-    public Piece(boolean white, Spot spot, int value) {
+    public Piece(boolean white, Spot spot, int value, Board board) {
         this.white = white;
-        this.killed = false;
         this.spot = spot;
         this.value = value;
-    }
-
-    public boolean isKilled() {
-        return killed;
-    }
-
-    public boolean isWhite() {
-        return white;
-    }
-
-    public Spot getSpot() {
-        return spot;
+        this.board = board;
     }
 
     public void setSpot(Spot spot) {
@@ -43,11 +32,25 @@ public abstract class Piece {
 
     public abstract boolean isValidMove(Spot startSpot, Spot endSpot);
 
-    public void setKilled(boolean killed) {
-        this.killed = killed;
+    public boolean isWhite() {
+        return white;
+    }
+
+    public Spot getSpot() {
+        return spot;
     }
 
     public int getValue() {
         return value;
     }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public abstract Piece copyPiece();
 }

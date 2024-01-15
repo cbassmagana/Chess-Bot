@@ -1,11 +1,13 @@
 package Model;
 
+// Represents a specific piece, a pawn, that extends the abstract Piece class
 public class Pawn extends Piece {
 
-    public Pawn(boolean white, Spot spot) {
-        super(white, spot, 1);
+    public Pawn(boolean white, Spot spot, Board board) {
+        super(white, spot, 1, board);
     }
 
+    // EFFECTS: returns true if the pawn moves one (or two on first move) square forwards or captures diagonally
     @Override
     public boolean isValidMove(Spot startSpot, Spot endSpot) {
         int deltaX = endSpot.getX() - startSpot.getX();
@@ -20,15 +22,15 @@ public class Pawn extends Piece {
 
         if (dir == 1 && startSpot.getY() == 1) {
             if (deltaY == 2 && deltaX == 0) {
-                return (Board.getInstance().getSquare(startSpot.getY() + 1, startSpot.getX()).getPiece() == null
-                && Board.getInstance().getSquare(startSpot.getY() + 2, startSpot.getX()).getPiece() == null);
+                return (board.getSquare(startSpot.getY() + 1, startSpot.getX()).getPiece() == null
+                && board.getSquare(startSpot.getY() + 2, startSpot.getX()).getPiece() == null);
             }
         }
 
         if (dir == -1 && startSpot.getY() == 6) {
             if (deltaY == -2 && deltaX == 0) {
-                return (Board.getInstance().getSquare(startSpot.getY() - 1, startSpot.getX()).getPiece() == null
-                && Board.getInstance().getSquare(startSpot.getY() - 2, startSpot.getX()).getPiece() == null);
+                return (board.getSquare(startSpot.getY() - 1, startSpot.getX()).getPiece() == null
+                && board.getSquare(startSpot.getY() - 2, startSpot.getX()).getPiece() == null);
             }
         }
 
@@ -39,5 +41,10 @@ public class Pawn extends Piece {
         }
 
         return false;
+    }
+
+    @Override
+    public Piece copyPiece() {
+        return new Pawn(white, null, null);
     }
 }

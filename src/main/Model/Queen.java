@@ -1,11 +1,13 @@
 package Model;
 
+// Represents a specific piece, a queen, that extends the abstract Piece class
 public class Queen extends Piece {
 
-    public Queen(boolean white, Spot spot) {
-        super(white, spot, 9);
+    public Queen(boolean white, Spot spot, Board board) {
+        super(white, spot, 9, board);
     }
 
+    // EFFECTS: returns that a move is valid if the queen moves in diagonally or in a straight line
     @Override
     public boolean isValidMove(Spot startSpot, Spot endSpot) {
         int startY = startSpot.getY();
@@ -37,7 +39,7 @@ public class Queen extends Piece {
 
         if (startX == endX) {
             for (int i = startY + dirY; startY < endY ? i < endY : i > endY;) {
-                if (Board.getInstance().getSquare(i, startX).getPiece() != null) {
+                if (board.getSquare(i, startX).getPiece() != null) {
                     return false;
                 }
                 i = i + dirY;
@@ -47,7 +49,7 @@ public class Queen extends Piece {
 
         if (startY == endY) {
             for (int i = startX + dirX; startX < endX ? i < endX : i > endX;) {
-                if (Board.getInstance().getSquare(startY, i).getPiece() != null) {
+                if (board.getSquare(startY, i).getPiece() != null) {
                     return false;
                 }
                 i = i + dirX;
@@ -57,12 +59,17 @@ public class Queen extends Piece {
 
         if (Math.abs(deltaX) == Math.abs(deltaY)) {
             for (int i = 1; i < Math.abs(deltaY); i++) {
-                if (Board.getInstance().getSquare(startY + (i * dirY), startX + (i * dirX)).getPiece() != null) {
+                if (board.getSquare(startY + (i * dirY), startX + (i * dirX)).getPiece() != null) {
                     return false;
                 }
             }
         }
 
         return true;
+    }
+
+    @Override
+    public Piece copyPiece() {
+        return new Queen(white, null, null);
     }
 }
