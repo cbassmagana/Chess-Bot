@@ -37,7 +37,7 @@ around the level of an intermediate/advanced chess player
 strengths and weaknesses compared to a human player of 
 approximately the same overall ability. Several small 
 adjustments to the algorithm have significantly improved 
-its competency, and its steep learning curve indicates 
+its decision-making, and its steep learning curve indicates 
 substantial room for further improvement.
 
 *Note: This is an approximate elo rating assuming blitz style
