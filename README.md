@@ -2,7 +2,7 @@
 
 ## About This Project
 
-In this application, built in 2023, I have designed and implemented a chess 
+In this application, I have designed and implemented a chess 
 game where the user plays against a strategic chess bot. I 
 am an enthusiastic chess player and was interested in 
 this project for both improving/showcasing my programming,
