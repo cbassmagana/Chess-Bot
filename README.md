@@ -31,7 +31,9 @@ select sequences of valid moves on the board up to 5 moves in
 advance, adjusting each move's point evaluation for factors
 like capturing/losing pieces, putting the opponent in check, 
 promoting pawns, developing pieces from the back rank, and 
-ultimately finding checkmate.
+ultimately finding checkmate. Exact weighting of each of these
+factors was selected via evolutionary optimization to improve 
+upon a basic hyper-parameter grid-search approach.
 
 The bot currently performs quite competently, playing at 
 around the level of an intermediate/advanced chess player 
