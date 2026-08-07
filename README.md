@@ -1,45 +1,29 @@
-# Personal Project - Strategic Chess Bot
+# Strategic Chess Bot
 
 ## About This Project
 
 In this application, I have designed and implemented a chess 
-game where the user plays against a strategic chess bot. I 
+environment where the user plays against a strategic chess bot. I 
 am an enthusiastic chess player and was interested in 
-this project for both improving/showcasing my programming,
-and satisfying my curiosity about designing a 
+this project for both improving/showcasing my programming, 
+and also satisfying my curiosity about designing a 
 competent chess bot.
 
-The game is played using a graphical interface from Java
-Swing, and concludes either when the game ends or the 
-user exits the application. To play, select the piece you 
-want to move by clicking on it, then choose the square you 
-wish to move it to. If the move violates the game rules, 
-it won't be executed, and you must try again. The computer
-will respond automatically, continuing to play until the 
-game finishes.
+## How the Engine Works
 
-The bot employs a depth-first search of game moves, using strategic 
-pruning of search branches based on simple heuristics to enable
-a greater depth of analysis on likely favorable paths. It evaluates each available valid
-move on the board using a point system, selecting the
-move with the most favorable point rating (depths considered). In cases where
-multiple moves tie for the highest point rating, one of 
-these moves is selected randomly. Different moves are assigned
-point ratings under the assumption that the user will always 
-respond with the best move available to them. The bot searches
-select sequences of valid moves on the board up to 5 moves in 
-advance, adjusting each move's point evaluation for factors
-like capturing/losing pieces, putting the opponent in check, 
-promoting pawns, developing pieces from the back rank, and 
-ultimately finding checkmate. Exact weighting of each of these
-factors was selected via evolutionary optimization to improve 
-upon a basic hyper-parameter grid-search approach.
+The bot searches potential move sequences using a depth-first minimax search with 
+heuristic-based pruning, allowing it to focus computation on the most promising 
+lines rather than exhaustively searching every branch. Each candidate move is 
+scored using a weighted evaluation system and searched up to five moves ahead, 
+under the assumption that the user always plays their best available response. 
+Move scores account for factors such as material gained or lost, checks, pawn promotion, 
+piece development from the back rank, and forced checkmates; when multiple moves tie for 
+the top score, one is selected at random. Rather than hand-tuning these weights, I 
+selected them through self-play using an evolutionary optimization algorithm, 
+rather than just using a basic grid-search.
 
-The bot currently performs quite competently, playing at 
-around the level of an intermediate/advanced chess player 
-(elo ~ 1600-1800). However, the bot exhibits noticeable 
-strengths and weaknesses compared to a human player of 
-approximately the same overall ability. Several small 
-adjustments to the algorithm have significantly improved 
-its decision-making, and its steep learning curve indicates 
-substantial room for further improvement.
+## Performance
+
+The bot currently plays at roughly an intermediate/advanced level (~1600–1800 ELO), though 
+its strengths and weaknesses differ noticeably from a human player of similar rating. Small tuning 
+adjustments have produced outsized gains in play quality, suggesting there's still real room for improvement with further iteration.
